@@ -2,11 +2,10 @@ import  tokenAddresses from './tokenAddresses.js'
 import axios from "axios"
 
 async function margins(coin){
-	const apiUrl = `https://api.dexscreener.com/latest/dex/tokens/${coin}`	
-	function getData(URL){
+	function getData(coin){
 		return new Promise((resolve, reject) => {
 		let tokenDataLocal = []
-		axios.get(URL)
+		axios.get( `https://api.dexscreener.com/latest/dex/tokens/${coin}`)
 			.then((response) => {
 			  response.data.pairs.forEach((pair) => {
 				tokenDataLocal.push({
@@ -26,7 +25,7 @@ async function margins(coin){
 	  }
 
     try {
-		const tokenData = await getData(apiUrl);
+		const tokenData = await getData(coin);
 
       let lowestPair = tokenData.reduce((lowest, current) => {
         return  parseFloat(current.pairPriceUSD)<  parseFloat(lowest.pairPriceUSD)? current : lowest
