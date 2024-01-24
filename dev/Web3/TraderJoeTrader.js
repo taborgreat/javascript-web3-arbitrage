@@ -1029,7 +1029,7 @@ const approvalAmount = (BigInt(amountInWei) * BigInt(1000000)).toString();
       amountInWei,
       path,
       walletAddress,
-      deadline
+      deadline, 
     );
    await swapTx.wait();
 
